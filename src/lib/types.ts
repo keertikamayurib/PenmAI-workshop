@@ -7,6 +7,7 @@ export type RoomFormSchema = {
   roomPurpose: "living room" | "bedroom" | "study" | "office";
   stylePreference: "modern" | "traditional" | "minimalist" | "luxury";
   lightingConditions: "natural light" | "artificial" | "dark room";
+  mood: "cozy" | "formal" | "playful" | "calm" | "energetic";
   budget: "low" | "medium" | "high";
 };
 

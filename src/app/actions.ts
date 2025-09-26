@@ -46,6 +46,7 @@ const FormSchema = z.object({
   roomPurpose: z.enum(["living room", "bedroom", "study", "office"]),
   stylePreference: z.enum(["modern", "traditional", "minimalist", "luxury"]),
   lightingConditions: z.enum(["natural light", "artificial", "dark room"]),
+  mood: z.enum(['cozy', 'formal', 'playful', 'calm', 'energetic']),
   budget: z.enum(["low", "medium", "high"]),
 });
 
@@ -65,6 +66,7 @@ export async function getRoomRecommendations(
     stylePreference: data.stylePreference,
     lightingConditions: data.lightingConditions,
     budget: data.budget,
+    mood: data.mood,
   };
 
   const itemInput: RecommendFurnitureAndDecorInput = {
@@ -76,6 +78,7 @@ export async function getRoomRecommendations(
     roomPurpose: data.roomPurpose,
     roomStyle: data.stylePreference,
     budget: data.budget,
+    mood: data.mood,
   };
 
   try {

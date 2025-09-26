@@ -37,6 +37,7 @@ const formSchema = z.object({
   roomPurpose: z.enum(["living room", "bedroom", "study", "office"]),
   stylePreference: z.enum(["modern", "traditional", "minimalist", "luxury"]),
   lightingConditions: z.enum(["natural light", "artificial", "dark room"]),
+  mood: z.enum(['cozy', 'formal', 'playful', 'calm', 'energetic']),
   budget: z.enum(["low", "medium", "high"]),
 });
 
@@ -65,6 +66,13 @@ const selectItems = {
     { value: "artificial", label: "Artificial Light" },
     { value: "dark room", label: "Dark Room" },
   ],
+  mood: [
+    { value: "cozy", label: "Cozy" },
+    { value: "formal", label: "Formal" },
+    { value: "playful", label: "Playful" },
+    { value: "calm", label: "Calm" },
+    { value: "energetic", label: "Energetic" },
+  ],
   budget: [
     { value: "low", label: "Low" },
     { value: "medium", label: "Medium" },
@@ -82,6 +90,7 @@ export function RoomForm({ onSubmit, isLoading }: RoomFormProps) {
       roomPurpose: "living room",
       stylePreference: "modern",
       lightingConditions: "natural light",
+      mood: "cozy",
       budget: "medium",
     },
   });
@@ -210,6 +219,33 @@ export function RoomForm({ onSubmit, isLoading }: RoomFormProps) {
                     </FormControl>
                     <SelectContent>
                       {selectItems.lightingConditions.map((item) => (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="mood"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Desired Mood</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a mood" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {selectItems.mood.map((item) => (
                         <SelectItem key={item.value} value={item.value}>
                           {item.label}
                         </SelectItem>

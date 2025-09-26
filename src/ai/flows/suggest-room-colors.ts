@@ -24,6 +24,9 @@ const SuggestRoomColorsInputSchema = z.object({
   budget: z
     .string()
     .describe('The user budget (e.g. Low, Medium, High).'),
+  mood: z
+    .enum(['cozy', 'formal', 'playful', 'calm', 'energetic'])
+    .describe('The desired mood for the room.'),
 });
 export type SuggestRoomColorsInput = z.infer<typeof SuggestRoomColorsInputSchema>;
 
@@ -49,6 +52,7 @@ const prompt = ai.definePrompt({
 Room Purpose: {{{roomPurpose}}}
 Style Preference: {{{stylePreference}}}
 Lighting Conditions: {{{lightingConditions}}}
+Desired Mood: {{{mood}}}
 Budget: {{{budget}}}
 
 Consider the mood and ambiance typically associated with the room purpose, the user's style preferences, the impact of lighting conditions on color perception, and the user's budget when making your suggestions. Provide a description of why the color was chosen and how it fits the room.

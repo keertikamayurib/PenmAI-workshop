@@ -28,6 +28,9 @@ const RecommendFurnitureAndDecorInputSchema = z.object({
   budget: z
     .enum(['low', 'medium', 'high'])
     .describe('The budget for the furniture and decor.'),
+  mood: z
+    .enum(['cozy', 'formal', 'playful', 'calm', 'energetic'])
+    .describe('The desired mood of the room.'),
 });
 export type RecommendFurnitureAndDecorInput = z.infer<
   typeof RecommendFurnitureAndDecorInputSchema
@@ -55,11 +58,12 @@ const prompt = ai.definePrompt({
   name: 'recommendFurnitureAndDecorPrompt',
   input: {schema: RecommendFurnitureAndDecorInputSchema},
   output: {schema: RecommendFurnitureAndDecorOutputSchema},
-  prompt: `You are an interior design assistant. Based on the room's dimensions, purpose, style, and budget, you will provide a list of furniture and decor items.
+  prompt: `You are an interior design assistant. Based on the room's dimensions, purpose, style, mood, and budget, you will provide a list of furniture and decor items.
 
 Room Dimensions: Length: {{{roomDimensions.length}}} meters, Breadth: {{{roomDimensions.breadth}}} meters, Height: {{{roomDimensions.height}}} meters
 Room Purpose: {{{roomPurpose}}}
 Room Style: {{{roomStyle}}}
+Desired Mood: {{{mood}}}
 Budget: {{{budget}}}
 
 Consider the budget when recommending items. For a low budget, suggest affordable options. For a high budget, suggest luxury items.
